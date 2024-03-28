@@ -1,1 +1,1 @@
-These are novice scrpts for education purposes. 
+These are Red Hat scripts for education purposes.

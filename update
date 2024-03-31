@@ -1,0 +1,17 @@
+#!/bin/bash 
+
+#For ubuntu updates
+os_file=/etc/os-release
+
+if grep -q "Ubuntu" $os_file
+then
+	sudo apt-get update && sudo apt-get upgrade 
+	sudo apt update 
+	sudo apt install update 
+	sudo apt full-upgrade
+	sudo apt install upgrade 
+	sudo apt autoremove
+fi
+
+
+

@@ -1,0 +1,53 @@
+#!/bin/bash 
+
+#variables
+
+os_file=/etc/os-release 
+errorlog=/var/log 
+
+#functions
+
+check_exit_status() {
+	if [ $? -ne 0 ] 
+	then 
+		echo "An error occurrend, please check the $errorlog file."
+	else 
+		echo " ============================="
+	        echo " Download has been successfull"
+	 	echo " ============================="
+	fi
+}
+
+pacman_update () {
+	sudo pacman -Syu 2> $errorlog 
+}
+
+apt_update() { 
+
+	sudo apt-get update && sudo apt-get upgrade 2> $errorlog 
+	sudo apt update 
+	sudo apt install update 
+	sudo apt full-upgrade
+	sudo apt install upgrade 
+	sudo apt autoremove
+}
+
+######################### START OF SCRIPT #############################
+	
+#FOR ARCH UPDATES
+
+if grep -q "arch" $os_file
+then 
+	pacman_update
+	check_exit_status 
+		
+fi
+
+#FOR DEBIAN UDPATES
+ 
+if grep -q "Ubuntu" $os_file || grep -q "Debian" $os_file
+then
+	
+	apt_update 
+	check_exit_status 
+fi
